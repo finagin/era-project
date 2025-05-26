@@ -13,7 +13,7 @@ RUN apk add --no-cache git bash imagemagick-dev libpng-dev libjpeg-turbo-dev icu
 
 COPY --from=composer:lts /usr/bin/composer /usr/bin/composer
 
-COPY dockers/php-fpm/docker-entrypoint.sh /usr/local/bin/entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
 
 WORKDIR /var/www

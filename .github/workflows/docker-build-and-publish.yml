@@ -56,5 +56,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha,scope=${{ github.repository }}
-          cache-to: type=gha,mode=max,scope=${{ github.repository }}
+          cache-from: type=gha,scope=${{ format('{0}:{1}-{2}', github.repository, matrix.php-version, matrix.alpine-version) }}
+          cache-to: type=gha,mode=max,scope=${{ format('{0}:{1}-{2}', github.repository, matrix.php-version, matrix.alpine-version) }}

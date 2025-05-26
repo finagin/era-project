@@ -1,6 +1,5 @@
 on:
   push:
-    paths-ignore: [ ".github" ]
   schedule: [ { cron: "0 0 * * *" } ]
 
 permissions:
@@ -14,7 +13,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        php-version: [ "8.2", "8.3", "8.4-rc" ]
+        php-version: [ "8.2", "8.3" ]
         alpine-version: [ "3.20", "3.21" ]
         target: [ "debug", "" ]
     steps:

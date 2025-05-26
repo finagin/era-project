@@ -14,8 +14,9 @@ jobs:
       packages: write
     strategy:
       matrix:
-        php-version: [ "8.2", "8.3" ]
+        php-version: [ "8.2", "8.3", "8.4-rc" ]
         alpine-version: [ "3.20", "3.21" ]
+        target: [ "debug", "" ]
     steps:
       - name: 📂 Checkout
         uses: actions/checkout@v4
@@ -34,7 +35,7 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=php-${{ matrix.php-version }}-alpine-${{ matrix.alpine-version }}
+            type=raw,value=php${{ matrix.php-version }}-alpine${{ matrix.alpine-version }}${{ matrix.target != '' && format('-{0}', matrix.target) || '' }}
             type=sha
 
       - name: 🛠️ Set up QEMU
@@ -48,6 +49,7 @@ jobs:
         if: ${{ steps.meta.outputs.version }}
         uses: docker/build-push-action@v6
         with:
+          target: ${{ matrix.target }}
           build-args: |
             PHP_VERSION=${{ matrix.php-version }}
             ALPINE_VERSION=${{ matrix.alpine-version }}

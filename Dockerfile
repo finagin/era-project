@@ -19,3 +19,13 @@ RUN chmod +x /usr/local/bin/entrypoint
 WORKDIR /var/www
 
 ENTRYPOINT ["entrypoint"]
+
+
+FROM base AS debug
+
+ENV APP_ENV=local
+
+RUN pecl install xdebug && docker-php-ext-enable xdebug;
+
+
+FROM base

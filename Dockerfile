@@ -18,6 +18,10 @@ RUN chmod +x /usr/local/bin/entrypoint
 
 WORKDIR /var/www
 
+#COPY --chown=www-data . .
+
+#RUN composer install --no-dev --prefer-dist --no-progress --no-interaction
+
 ENTRYPOINT ["entrypoint"]
 
 
